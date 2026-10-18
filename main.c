@@ -6,7 +6,7 @@
 /*   By: ericpayen </var/spool/mail/ericpayen>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 08:42:14 by ericpayen         #+#    #+#             */
-/*   Updated: 2026/10/18 10:56:51 by ericpayen        ###   ########.fr       */
+/*   Updated: 2026/10/18 14:47:06 by ericpayen        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 	const char	*dict_path;
 	char		*num_str;
 
+	dict.head = NULL;
 	if (!check_input(argc, argv, &dict_path, &num_str))
 	{
 		write(2, "Error\n", 6);
@@ -39,5 +40,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	print_large_number(&dict, num_str);
+	free_dictionary(&dict);
 	return (0);
 }
