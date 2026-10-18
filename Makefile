@@ -6,15 +6,18 @@
 #    By: ericpayen </var/spool/mail/ericpayen>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/18 09:07:34 by ericpayen         #+#    #+#              #
-#    Updated: 2026/10/18 10:23:51 by ericpayen        ###   ########.fr        #
+#    Updated: 2026/10/18 12:59:07 by ericpayen        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
+# *#+   +#+            #
 NAME = rush-02
 DEBUG_NAME = debug.out
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 DEBUG_FLAGS = -Wall -Wextra -Werror -g3
+
+# FIXED: Standardized header name dependency down below (rosetta.h)
+HEADER = rosetta.h
 
 SRC = main.c load_dictionary.c parsing_utils.c lookup_exception.c \
       print_dict_word.c print_triplet_value.c print_large_number.c check_input.c
@@ -26,7 +29,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.c rossetta.h
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 debug: $(DEBUG_NAME)
@@ -34,7 +37,7 @@ debug: $(DEBUG_NAME)
 $(DEBUG_NAME): $(DEBUG_OBJ)
 	$(CC) $(DEBUG_FLAGS) $(DEBUG_OBJ) -o $(DEBUG_NAME)
 
-%_debug.o: %.c rossetta.h
+%_debug.o: %.c $(HEADER)
 	$(CC) $(DEBUG_FLAGS) -c $< -o $@
 
 clean:
@@ -46,3 +49,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re debug
+
